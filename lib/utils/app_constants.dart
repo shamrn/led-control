@@ -15,3 +15,11 @@ class Styles {
   static const TextStyle primaryTextStyle =
       TextStyle(color: primaryColor, fontSize: 22);
 }
+
+
+// Brightness Level
+class BrightnessLevel {
+  static const double maxLevel = 100;
+  static const double minLevel = 0.1;
+  static const double initLevel = maxLevel;
+}

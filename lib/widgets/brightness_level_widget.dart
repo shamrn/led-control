@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
+import 'package:rgb_control/bloc/color_bloc/color_event.dart';
+import 'package:rgb_control/bloc/color_bloc/color_state.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
 class BrightnessLevelWidget extends StatefulWidget {
@@ -9,9 +13,6 @@ class BrightnessLevelWidget extends StatefulWidget {
 }
 
 class _BrightnessLevelWidgetState extends State<BrightnessLevelWidget> {
-
-  double _currentSliderValue = 100;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,21 +31,28 @@ class _BrightnessLevelWidgetState extends State<BrightnessLevelWidget> {
             )
           ],
         ),
-        const SizedBox(height: 20,),
+        const SizedBox(
+          height: 20,
+        ),
         SliderTheme(
           data: SliderThemeData(overlayShape: SliderComponentShape.noOverlay),
-          child: Slider.adaptive(
-              value: _currentSliderValue,
-              min: 0.1,
-              max: 100,
-              thumbColor: Styles.primaryColor,
-              activeColor: Styles.secondColor,
-              inactiveColor: Styles.secondColor,
-              onChanged: (double value) {
-                setState(() {
-                  _currentSliderValue = value;
-                });
-              }
+          child: BlocProvider(
+            create: (context) => ColorBrightnessLevelBloc(),
+            child: BlocBuilder<ColorBrightnessLevelBloc,
+                ColorBrightnessLevelState>(
+              builder: (context, state) => Slider.adaptive(
+                  value: state.level,
+                  min: BrightnessLevel.minLevel,
+                  max: BrightnessLevel.maxLevel,
+                  thumbColor: Styles.primaryColor,
+                  activeColor: Styles.secondColor,
+                  inactiveColor: Styles.secondColor,
+                  onChanged: (double level) {
+                    context
+                        .read<ColorBrightnessLevelBloc>()
+                        .add(BrightnessLevelSetEvent(level: level));
+                  }),
+            ),
           ),
         )
       ],
