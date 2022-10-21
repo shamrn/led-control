@@ -45,6 +45,10 @@ dependencies:
   # design pattern. Built to be used with the bloc state management package.
   flutter_bloc: ^8.1.1
 
+  # StreamChannel wrappers for WebSockets. Provides a cross-platform WebSocketChannel API,
+  # a cross-platform implementation of that API that communicates over an underlying StreamChannel.
+  web_socket_channel: ^2.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
