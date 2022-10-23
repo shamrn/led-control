@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
 import 'package:rgb_control/bloc/color_bloc/color_event.dart';
-import 'package:rgb_control/bloc/color_bloc/color_state.dart';
 
 class ColorPaletteWidget extends StatefulWidget {
   const ColorPaletteWidget({Key? key}) : super(key: key);
@@ -21,9 +20,9 @@ class _ColorPaletteWidgetState extends State<ColorPaletteWidget> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ColorPaletteBloc(),
-      child: BlocBuilder<ColorPaletteBloc, ColorPaletteState>(
-        builder: (context, state) => ColorPicker(
-          pickerColor: state.currentColor,
+      child: BlocBuilder<ColorPaletteBloc, Color>(
+        builder: (context, currentColor) => ColorPicker(
+          pickerColor: currentColor,
           onColorChanged: changeColor,
           colorPickerWidth: MediaQuery.of(context).size.width,
           pickerAreaHeightPercent: 1,

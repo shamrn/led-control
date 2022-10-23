@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
 import 'package:rgb_control/bloc/color_bloc/color_event.dart';
-import 'package:rgb_control/bloc/color_bloc/color_state.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
 class BrightnessLevelWidget extends StatefulWidget {
@@ -38,10 +37,9 @@ class _BrightnessLevelWidgetState extends State<BrightnessLevelWidget> {
           data: SliderThemeData(overlayShape: SliderComponentShape.noOverlay),
           child: BlocProvider(
             create: (context) => ColorBrightnessLevelBloc(),
-            child: BlocBuilder<ColorBrightnessLevelBloc,
-                ColorBrightnessLevelState>(
-              builder: (context, state) => Slider.adaptive(
-                  value: state.level,
+            child: BlocBuilder<ColorBrightnessLevelBloc, double>(
+              builder: (context, currentLevel) => Slider.adaptive(
+                  value: currentLevel,
                   min: BrightnessLevel.minLevel,
                   max: BrightnessLevel.maxLevel,
                   thumbColor: Styles.primaryColor,
