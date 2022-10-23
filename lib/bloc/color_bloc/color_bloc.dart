@@ -18,3 +18,18 @@ class ColorBrightnessLevelBloc
     });
   }
 }
+
+class ColorPowerBloc extends Bloc<ColorEvent, ColorState> {
+  ColorPowerBloc() : super(ColorPowerOffState()) {
+    on<ColorPowerOnEvent>((event, emit) => emit(ColorPowerOnState()));
+    on<ColorPowerOffEvent>((event, emit) => emit(ColorPowerOffState()));
+  }
+
+  void switching(ColorState state) {
+    if (state is ColorPowerOffState) {
+      add(ColorPowerOnEvent());
+    } else {
+      add(ColorPowerOffEvent());
+    }
+  }
+}

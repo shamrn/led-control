@@ -13,3 +13,7 @@ class BrightnessLevelSetEvent extends ColorEvent {
 
   BrightnessLevelSetEvent({required this.level});
 }
+
+class ColorPowerOnEvent extends ColorEvent {}
+
+class ColorPowerOffEvent extends ColorEvent {}

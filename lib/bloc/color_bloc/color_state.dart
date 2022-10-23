@@ -33,3 +33,7 @@ class ColorBrightnessLevelInitialState extends ColorBrightnessLevelState {
 class ColorBrightnessLevelSetState extends ColorBrightnessLevelState {
   ColorBrightnessLevelSetState({required level}) : super(level: level);
 }
+
+class ColorPowerOnState extends ColorState {}
+
+class ColorPowerOffState extends ColorState {}
