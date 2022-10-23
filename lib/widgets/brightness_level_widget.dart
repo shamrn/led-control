@@ -19,7 +19,7 @@ class BrightnessLevelWidget extends StatelessWidget {
               style: Styles.primaryTextStyle,
             ),
             Icon(
-              Icons.lightbulb_outline_rounded,
+              Icons.light_mode_sharp,
               color: Styles.primaryColor,
               size: 26,
             )
@@ -45,7 +45,11 @@ class _SliderBrightnessLevelState extends State<SliderBrightnessLevel> {
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
-      data: SliderThemeData(overlayShape: SliderComponentShape.noOverlay),
+      data: SliderThemeData(
+        overlayShape: SliderComponentShape.noOverlay,
+        showValueIndicator: ShowValueIndicator.always,
+        valueIndicatorColor: Styles.secondColor.withOpacity(0.4),
+      ),
       child: BlocProvider(
         create: (context) => ColorBrightnessLevelBloc(),
         child: BlocBuilder<ColorBrightnessLevelBloc, double>(
@@ -53,9 +57,10 @@ class _SliderBrightnessLevelState extends State<SliderBrightnessLevel> {
               value: currentLevel,
               min: BrightnessLevel.minLevel,
               max: BrightnessLevel.maxLevel,
+              label: '${currentLevel.toInt()}%',
               thumbColor: Styles.primaryColor,
               activeColor: Styles.secondColor,
-              inactiveColor: Styles.secondColor,
+              inactiveColor: Styles.secondColor.withOpacity(0.5),
               onChanged: (double level) {
                 context
                     .read<ColorBrightnessLevelBloc>()
