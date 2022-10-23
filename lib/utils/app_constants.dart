@@ -7,6 +7,7 @@ class Texts {
 
 // Styles
 class Styles {
+  static const Color canvasColor = Color(0xff000000);
   static const Color primaryColor = Color(0xfff4fbff);
   static const Color secondColor = Color(0xff2185ca);
 

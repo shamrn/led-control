@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rgb_control/screens/home_screen.dart';
+import 'package:rgb_control/utils/app_constants.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,9 +10,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Styles.canvasColor,
+        systemNavigationBarColor: Styles.canvasColor));
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(canvasColor: Colors.black),
+        theme: ThemeData(canvasColor: Styles.canvasColor),
         home: const HomeScreen());
   }
 }
