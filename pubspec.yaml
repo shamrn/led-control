@@ -49,6 +49,10 @@ dependencies:
   # a cross-platform implementation of that API that communicates over an underlying StreamChannel.
   web_socket_channel: ^2.2.0
 
+  # Flutter package for Eva Icons. Eva Icons is a pack of more than 480 beautifully crafted
+  # Open Source icons for common actions and items.
+  eva_icons_flutter: ^3.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
