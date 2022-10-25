@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
 import 'package:rgb_control/bloc/color_bloc/color_event.dart';
 import 'package:rgb_control/utils/app_constants.dart';
+import 'package:rgb_control/widgets/section_widget.dart';
 
 class BrightnessLevelWidget extends StatelessWidget {
   const BrightnessLevelWidget({Key? key}) : super(key: key);
@@ -10,25 +11,13 @@ class BrightnessLevelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const <Widget>[
-            Text(
-              Texts.brightnessLevelTitle,
-              style: Styles.primaryTextStyle,
-            ),
-            Icon(
-              Icons.light_mode_sharp,
-              color: Styles.primaryColor,
-              size: 26,
-            )
-          ],
-        ),
-        const SizedBox(
+      children: const <Widget>[
+        SectionWidget(
+            title: Texts.brightnessLevelTitle, icon: Icons.light_mode_sharp),
+        SizedBox(
           height: 20,
         ),
-        const SliderBrightnessLevel()
+        SliderBrightnessLevel()
       ],
     );
   }
