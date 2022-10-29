@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/models/mode.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/section_widget.dart';
@@ -19,45 +22,23 @@ class ModeListWidget extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Wrap(
-          alignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: Styles.modeCardSpacing,
-          runSpacing: 12,
-          direction: Axis.horizontal,
-          children: [
-            ModeCardWidget(
-                mode: Mode(
-                    id: 1,
-                    name: 'Color Jump',
-                    imageUrl:
-                        'https://www.slate.fr/sites/default/files/styles/1060x523/public/julian-hochgesang-pvikejwyofa-unsplash.jpg')),
-            ModeCardWidget(
-                active: true,
-                mode: Mode(
-                    id: 1,
-                    name: 'Lightning',
-                    imageUrl:
-                        'https://images.unsplash.com/photo-1584267385289-81fdaa6efe7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzOTAwNXwwfDF8c2VhcmNofDMxfHxMaWdodG5pbmd8ZW58MHx8fHwxNjY2NjM1NDEw&ixlib=rb-4.0.3&q=80&w=400')),
-            ModeCardWidget(
-                mode: Mode(
-                    id: 1,
-                    name: 'Smooth rgb',
-                    imageUrl:
-                        'https://images.unsplash.com/photo-1541701494587-cb58502866ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzOTAwNXwwfDF8c2VhcmNofDI5fHxyZ2J8ZW58MHx8fHwxNjY2NjM1Njcy&ixlib=rb-4.0.3&q=80&w=400')),
-            ModeCardWidget(
-                mode: Mode(
-                    id: 1,
-                    name: 'Rainbow',
-                    imageUrl:
-                        'https://images.unsplash.com/photo-1545231097-cbd796f1d95f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzOTAwNXwwfDF8c2VhcmNofDIyfHxSYWluYm93fGVufDB8fHx8MTY2NjYzNTgyOQ&ixlib=rb-4.0.3&q=80&w=400')),
-            ModeCardWidget(
-                mode: Mode(
-                    id: 1,
-                    name: 'Relax',
-                    imageUrl:
-                        'https://images.unsplash.com/photo-1474540412665-1cdae210ae6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzOTAwNXwwfDF8c2VhcmNofDE0fHxSZWxheC1jb2xvcnxlbnwwfHx8fDE2NjY2MzYxMjA&ixlib=rb-4.0.3&q=80&w=400'))
-          ],
+        BlocBuilder<ModeBloc, ModeState>(
+          builder: (context, state) {
+            return Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: Styles.modeCardSpacing,
+                runSpacing: 12,
+                direction: Axis.horizontal,
+                children: [
+                  if (state is ModeLoadingState)
+                    LoadingAnimationWidget.flickr(
+                      rightDotColor: Colors.pink,
+                        leftDotColor: Styles.secondColor, size: 60),
+                  if (state is ModeLoadedState)
+                    ...state.modes.map((mode) => ModeCardWidget(mode: mode))
+                ]);
+          },
         )
       ],
     );

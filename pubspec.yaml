@@ -53,6 +53,10 @@ dependencies:
   # Open Source icons for common actions and items.
   eva_icons_flutter: ^3.1.0
 
+  # Loading animation or loading spiner or loader. It's used to show loading animation when the app
+  # is in loading state or something is processing for uncertain time.
+  loading_animation_widget: ^1.2.0+3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
