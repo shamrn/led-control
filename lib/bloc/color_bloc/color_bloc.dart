@@ -6,17 +6,13 @@ import 'package:rgb_control/utils/app_constants.dart';
 
 class ColorPaletteBloc extends Bloc<ColorEvent, Color> {
   ColorPaletteBloc() : super(Styles.initialColorPalette) {
-    on<ColorPaletteSetEvent>((event, emit) async {
-      emit(event.color);
-    });
+    on<ColorPaletteSetEvent>((event, emit) => emit(event.color));
   }
 }
 
 class ColorBrightnessLevelBloc extends Bloc<ColorEvent, double> {
   ColorBrightnessLevelBloc() : super(BrightnessLevel.initLevel) {
-    on<BrightnessLevelSetEvent>((event, emit) async {
-      emit(event.level);
-    });
+    on<BrightnessLevelSetEvent>((event, emit) => emit(event.level));
   }
 }
 

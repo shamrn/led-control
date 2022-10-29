@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/brightness_level_widget.dart';
 import 'package:rgb_control/widgets/color_palette_widget.dart';
@@ -10,34 +12,47 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const ColorPaletteWidget(),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(
-                      left: Styles.horizontalPrimaryPadding,
-                      right: Styles.horizontalPrimaryPadding,
-                      bottom: Styles.bottomPrimaryPadding),
-                  child: Column(
-                    children: const <Widget>[
-                      BrightnessLevelWidget(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ModeListWidget(),
-                    ],
-                  )),
-            ],
-          ),
-        )),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: const PowerButtonWidget());
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ColorPaletteBloc>(
+          create: (context) => ColorPaletteBloc(),
+        ),
+        BlocProvider<ColorBrightnessLevelBloc>(
+            create: (context) => ColorBrightnessLevelBloc()),
+        BlocProvider<ColorPowerBloc>(
+          create: (context) => ColorPowerBloc(),
+        )
+      ],
+      child: Scaffold(
+          body: SafeArea(
+              child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const ColorPaletteWidget(),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(
+                        left: Styles.horizontalPrimaryPadding,
+                        right: Styles.horizontalPrimaryPadding,
+                        bottom: Styles.bottomPrimaryPadding),
+                    child: Column(
+                      children: const <Widget>[
+                        BrightnessLevelWidget(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ModeListWidget(),
+                      ],
+                    )),
+              ],
+            ),
+          )),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: const PowerButtonWidget()),
+    );
   }
 }

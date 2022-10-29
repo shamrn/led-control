@@ -39,23 +39,20 @@ class _SliderBrightnessLevelState extends State<SliderBrightnessLevel> {
         showValueIndicator: ShowValueIndicator.always,
         valueIndicatorColor: Styles.secondColor.withOpacity(0.4),
       ),
-      child: BlocProvider(
-        create: (context) => ColorBrightnessLevelBloc(),
-        child: BlocBuilder<ColorBrightnessLevelBloc, double>(
-          builder: (context, currentLevel) => Slider.adaptive(
-              value: currentLevel,
-              min: BrightnessLevel.minLevel,
-              max: BrightnessLevel.maxLevel,
-              label: '${currentLevel.toInt()}%',
-              thumbColor: Styles.primaryColor,
-              activeColor: Styles.secondColor,
-              inactiveColor: Styles.secondColor.withOpacity(0.5),
-              onChanged: (double level) {
-                context
-                    .read<ColorBrightnessLevelBloc>()
-                    .add(BrightnessLevelSetEvent(level: level));
-              }),
-        ),
+      child: BlocBuilder<ColorBrightnessLevelBloc, double>(
+        builder: (context, currentLevel) => Slider.adaptive(
+            value: currentLevel,
+            min: BrightnessLevel.minLevel,
+            max: BrightnessLevel.maxLevel,
+            label: '${currentLevel.toInt()}%',
+            thumbColor: Styles.primaryColor,
+            activeColor: Styles.secondColor,
+            inactiveColor: Styles.secondColor.withOpacity(0.5),
+            onChanged: (double level) {
+              context
+                  .read<ColorBrightnessLevelBloc>()
+                  .add(BrightnessLevelSetEvent(level: level));
+            }),
       ),
     );
   }

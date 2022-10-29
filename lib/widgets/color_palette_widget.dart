@@ -12,25 +12,20 @@ class ColorPaletteWidget extends StatefulWidget {
 }
 
 class _ColorPaletteWidgetState extends State<ColorPaletteWidget> {
-  void changeColor(Color color) {
-    ColorPaletteBloc().add(ColorPaletteSetEvent(color: color));
-  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ColorPaletteBloc(),
-      child: BlocBuilder<ColorPaletteBloc, Color>(
-        builder: (context, currentColor) => ColorPicker(
+    return BlocBuilder<ColorPaletteBloc, Color>(
+      builder: (context, currentColor) =>
+      ColorPicker(
           pickerColor: currentColor,
-          onColorChanged: changeColor,
+          onColorChanged: (color) =>
+              ColorPaletteBloc().add(ColorPaletteSetEvent(color: color)),
           colorPickerWidth: MediaQuery.of(context).size.width,
-          pickerAreaHeightPercent: 1,
-          paletteType: PaletteType.hsv,
-          labelTypes: const [],
-          enableAlpha: false,
-        ),
-      ),
-    );
+      pickerAreaHeightPercent: 1,
+      paletteType: PaletteType.hsv,
+      labelTypes: const [],
+      enableAlpha: false,
+    ),);
   }
 }
