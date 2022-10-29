@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Texts
 class Texts {
   static const String brightnessLevelTitle = 'Яркость';
+  static const String modeTitle = 'Режимы';
 }
 
 // Styles
@@ -15,6 +16,10 @@ class Styles {
 
   static const TextStyle primaryTextStyle =
       TextStyle(color: primaryColor, fontSize: 22);
+
+  static const double horizontalPrimaryPadding = 20;
+  static const double bottomPrimaryPadding = 40;
+  static const double modeCardSpacing = 8;
 }
 
 
