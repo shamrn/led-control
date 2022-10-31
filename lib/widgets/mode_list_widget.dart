@@ -70,13 +70,13 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
   Widget build(BuildContext context) {
     return SizedBox(
         width: _width,
+        height: height,
         child: InkWell(
           onTap: () {
             HapticFeedback.vibrate();
           },
           borderRadius: BorderRadius.circular(borderRadiusValue),
           child: Stack(
-            alignment: AlignmentDirectional.bottomCenter,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(borderRadiusValue),
@@ -87,46 +87,48 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
                   width: _width,
                 ),
               ),
-              Positioned(
-                  top: 1,
-                  left: 136,
-                  child:
-                      _getSelectionIcon(color: Styles.primaryColor, size: 28)),
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(borderRadiusValue),
-                    bottomRight: Radius.circular(borderRadiusValue)),
-                child: Stack(
-                  children: [
-                    BackdropFilter(
-                      filter: ImageFilter.blur(
-                        sigmaX: 6.0,
-                        sigmaY: 6.0,
-                      ),
-                      child: const SizedBox(
-                        height: 28,
-                        width: double.infinity,
-                      ),
-                    ),
-                    Container(
-                      height: 28,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200.withOpacity(0.1),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(borderRadiusValue),
-                            bottomRight: Radius.circular(borderRadiusValue)),
-                      ),
-                      child: Center(
-                        child: Text(
-                          widget.mode.name,
-                          style: TextStyle(
-                              fontSize: 22,
-                              color: Styles.primaryColor.withOpacity(0.8)),
+              Align(
+                alignment: Alignment.topRight,
+                child: _getSelectionIcon(color: Styles.primaryColor, size: 28),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(borderRadiusValue),
+                      bottomRight: Radius.circular(borderRadiusValue)),
+                  child: Stack(
+                    children: [
+                      BackdropFilter(
+                        filter: ImageFilter.blur(
+                          sigmaX: 6.0,
+                          sigmaY: 6.0,
+                        ),
+                        child: const SizedBox(
+                          height: 28,
+                          width: double.infinity,
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        height: 28,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200.withOpacity(0.1),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(borderRadiusValue),
+                              bottomRight: Radius.circular(borderRadiusValue)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            widget.mode.name,
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Styles.primaryColor.withOpacity(0.8)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
