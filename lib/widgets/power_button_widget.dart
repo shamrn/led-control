@@ -16,29 +16,26 @@ class PowerButtonWidget extends StatefulWidget {
 class _PowerButtonWidgetState extends State<PowerButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ColorPowerBloc(),
-      child: BlocBuilder<ColorPowerBloc, ColorState>(
-        builder: (context, state) => ClipOval(
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () {
-                HapticFeedback.vibrate();
-                context.read<ColorPowerBloc>().switching(state);
-              },
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    border: Border.all(width: 2.4, color: _getColor(state))),
-                child: Icon(
-                  state is ColorPowerOffState
-                      ? EvaIcons.flashOffOutline
-                      : EvaIcons.flashOutline,
-                  color: _getColor(state),
-                  size: 50,
-                ),
+    return BlocBuilder<ColorPowerBloc, ColorState>(
+      builder: (context, state) => ClipOval(
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              HapticFeedback.vibrate();
+              context.read<ColorPowerBloc>().switching(state);
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(width: 2.4, color: _getColor(state))),
+              child: Icon(
+                state is ColorPowerOffState
+                    ? EvaIcons.flashOffOutline
+                    : EvaIcons.flashOutline,
+                color: _getColor(state),
+                size: 50,
               ),
             ),
           ),
