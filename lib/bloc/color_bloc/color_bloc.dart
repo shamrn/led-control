@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rgb_control/bloc/color_bloc/color_event.dart';
 import 'package:rgb_control/bloc/color_bloc/color_state.dart';
+import 'package:rgb_control/services/led_control/event.dart';
+import 'package:rgb_control/services/led_control/provider.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
 class ColorPaletteBloc extends Bloc<ColorEvent, Color> {
@@ -18,8 +20,18 @@ class ColorBrightnessLevelBloc extends Bloc<ColorEvent, double> {
 
 class ColorPowerBloc extends Bloc<ColorEvent, ColorState> {
   ColorPowerBloc() : super(ColorPowerOffState()) {
-    on<ColorPowerOnEvent>((event, emit) => emit(ColorPowerOnState()));
-    on<ColorPowerOffEvent>((event, emit) => emit(ColorPowerOffState()));
+    on<ColorPowerOnEvent>(_on_color_power_on);
+    on<ColorPowerOffEvent>(_on_color_power_off);
+  }
+
+  void _on_color_power_on(ColorPowerOnEvent event, Emitter<ColorState> emit) {
+    WebSocketManager().addEvent(Event().on());
+    emit(ColorPowerOnState());
+  }
+
+  void _on_color_power_off(ColorPowerOffEvent event, Emitter<ColorState> emit) {
+    WebSocketManager().addEvent(Event().off());
+    emit(ColorPowerOffState());
   }
 
   void switching(ColorState state) {

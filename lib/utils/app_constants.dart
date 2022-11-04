@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+// Api
+class Api {
+  static const host = 'ws://192.168.0.13';
+  static const port = '8765';
+}
+
 // Texts
 class Texts {
   static const String brightnessLevelTitle = 'Яркость';
