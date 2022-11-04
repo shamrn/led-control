@@ -28,10 +28,16 @@ class Styles {
   static const double modeCardSpacing = 8;
 }
 
-
 // Brightness Level
 class BrightnessLevel {
-  static const double maxLevel = 100;
+  static const double maxLevel = 100.0;
   static const double minLevel = 0.1;
   static const double initLevel = maxLevel;
+}
+
+// Rate
+class Rate {
+  static const double maxLevel = 100.0;
+  static const double minLevel = 0.1;
+  static const double initLevel = 50.0;
 }
