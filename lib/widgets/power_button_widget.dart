@@ -2,8 +2,8 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
-import 'package:rgb_control/bloc/color_bloc/color_state.dart';
+import 'package:rgb_control/bloc/led_control_bloc/led_control_bloc.dart';
+import 'package:rgb_control/bloc/led_control_bloc/led_control_state.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
 class PowerButtonWidget extends StatefulWidget {
@@ -16,14 +16,14 @@ class PowerButtonWidget extends StatefulWidget {
 class _PowerButtonWidgetState extends State<PowerButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ColorPowerBloc, ColorState>(
+    return BlocBuilder<PowerBloc, ColorState>(
       builder: (context, state) => ClipOval(
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
               HapticFeedback.vibrate();
-              context.read<ColorPowerBloc>().switching(state);
+              context.read<PowerBloc>().switching(state);
             },
             child: Container(
               padding: const EdgeInsets.all(8),

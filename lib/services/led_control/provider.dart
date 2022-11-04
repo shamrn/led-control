@@ -18,12 +18,7 @@ class WebSocketManager {
     channel.sink.add(json.encode(event));
   }
 
-  Map<dynamic, dynamic>? listen() {
-    channel.stream.listen((recMsg) {
-      // WebSocketHandler(State.fromJson(json.decode(recMsg))).handleState();
-      return json.decode(recMsg);
-    });
-
-    return {'123': '123'};
+  listen() {
+    channel.stream.listen((state) {}, onError: (error) {});
   }
 }

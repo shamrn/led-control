@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
+import 'package:rgb_control/bloc/led_control_bloc/led_control_bloc.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/brightness_level_widget.dart';
@@ -18,10 +18,10 @@ class HomeScreen extends StatelessWidget {
         BlocProvider<ColorPaletteBloc>(
           create: (context) => ColorPaletteBloc(),
         ),
-        BlocProvider<ColorBrightnessLevelBloc>(
-            create: (context) => ColorBrightnessLevelBloc()),
-        BlocProvider<ColorPowerBloc>(
-          create: (context) => ColorPowerBloc(),
+        BlocProvider<BrightnessLevelBloc>(
+            create: (context) => BrightnessLevelBloc()),
+        BlocProvider<PowerBloc>(
+          create: (context) => PowerBloc(),
         ),
         BlocProvider<ModeBloc>(
           create: (context) => ModeBloc()..add(ModeLoadEvent()),

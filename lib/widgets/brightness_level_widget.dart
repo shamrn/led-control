@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
-import 'package:rgb_control/bloc/color_bloc/color_event.dart';
+import 'package:rgb_control/bloc/led_control_bloc/led_control_bloc.dart';
+import 'package:rgb_control/bloc/led_control_bloc/led_control_event.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/section_widget.dart';
 
@@ -39,7 +39,7 @@ class _SliderBrightnessLevelState extends State<SliderBrightnessLevel> {
         showValueIndicator: ShowValueIndicator.always,
         valueIndicatorColor: Styles.secondColor.withOpacity(0.4),
       ),
-      child: BlocBuilder<ColorBrightnessLevelBloc, double>(
+      child: BlocBuilder<BrightnessLevelBloc, double>(
         builder: (context, currentLevel) => Slider.adaptive(
             value: currentLevel,
             min: BrightnessLevel.minLevel,
@@ -50,7 +50,7 @@ class _SliderBrightnessLevelState extends State<SliderBrightnessLevel> {
             inactiveColor: Styles.secondColor.withOpacity(0.5),
             onChanged: (double level) {
               context
-                  .read<ColorBrightnessLevelBloc>()
+                  .read<BrightnessLevelBloc>()
                   .add(BrightnessLevelSetEvent(level: level));
             }),
       ),

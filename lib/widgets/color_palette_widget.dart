@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:rgb_control/bloc/color_bloc/color_bloc.dart';
-import 'package:rgb_control/bloc/color_bloc/color_event.dart';
+import 'package:rgb_control/bloc/led_control_bloc/led_control_bloc.dart';
+import 'package:rgb_control/bloc/led_control_bloc/led_control_event.dart';
 
 class ColorPaletteWidget extends StatefulWidget {
   const ColorPaletteWidget({Key? key}) : super(key: key);
