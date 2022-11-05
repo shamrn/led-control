@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rgb_control/models/mode.dart';
+import 'package:rgb_control/services/led_control/event.dart';
+import 'package:rgb_control/services/led_control/provider.dart';
 
 part 'mode_event.dart';
 part 'mode_state.dart';
@@ -20,7 +22,7 @@ class ModeBloc extends Bloc<ModeEvent, ModeState> {
           id: 1,
           name: 'Color Jump',
           imageUrl:
-          'https://www.slate.fr/sites/default/files/styles/1060x523/public/julian-hochgesang-pvikejwyofa-unsplash.jpg'),
+              'https://www.slate.fr/sites/default/files/styles/1060x523/public/julian-hochgesang-pvikejwyofa-unsplash.jpg'),
       Mode(
           id: 2,
           name: 'Lightning',
@@ -44,5 +46,19 @@ class ModeBloc extends Bloc<ModeEvent, ModeState> {
     ];
 
     emit(ModeLoadedState(modes: mockModes));
+  }
+}
+
+class ModeSetBloc extends Bloc<ModeEvent, ModeSetState> {
+  ModeSetBloc() : super(ModeSetState(modeId: null)) {
+    on<ModeSetEvent>(_onModeSet);
+  }
+
+  void _onModeSet(ModeSetEvent event, emit) {
+    WebSocketManager().addEvent(Event().setMode(
+        modeId: event.modeId,
+        rate: event.rate,
+        brightnessLevel: event.brightnessLevel));
+    emit(ModeSetState(modeId: event.modeId));
   }
 }

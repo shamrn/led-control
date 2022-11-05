@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
+import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 import 'package:rgb_control/models/mode.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/section_widget.dart';
@@ -33,8 +35,9 @@ class ModeListWidget extends StatelessWidget {
                 children: [
                   if (state is ModeLoadingState)
                     LoadingAnimationWidget.flickr(
-                      rightDotColor: Colors.pink,
-                        leftDotColor: Styles.secondColor, size: 60),
+                        rightDotColor: Colors.pink,
+                        leftDotColor: Styles.secondColor,
+                        size: 60),
                   if (state is ModeLoadedState)
                     ...state.modes.map((mode) => ModeCardWidget(mode: mode))
                 ]);
@@ -48,10 +51,8 @@ class ModeListWidget extends StatelessWidget {
 //
 class ModeCardWidget extends StatefulWidget {
   final Mode mode;
-  final bool active;
 
-  const ModeCardWidget({Key? key, required this.mode, this.active = false})
-      : super(key: key);
+  const ModeCardWidget({Key? key, required this.mode}) : super(key: key);
 
   @override
   State<ModeCardWidget> createState() => _ModeCardWidgetState();
@@ -71,73 +72,87 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
     return SizedBox(
         width: _width,
         height: height,
-        child: InkWell(
-          onTap: () {
-            HapticFeedback.vibrate();
-          },
-          borderRadius: BorderRadius.circular(borderRadiusValue),
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(borderRadiusValue),
-                child: Image.network(
-                  widget.mode.imageUrl,
-                  fit: BoxFit.cover,
-                  height: height,
-                  width: _width,
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: _getSelectionIcon(color: Styles.primaryColor, size: 28),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(borderRadiusValue),
-                      bottomRight: Radius.circular(borderRadiusValue)),
+        child: BlocBuilder<ModeSetBloc, ModeSetState>(
+            builder: (context, state) => InkWell(
+                  onTap: () {
+                    HapticFeedback.vibrate();
+                    context.read<PowerBloc>().setInnerOn();
+                    context.read<ModeSetBloc>().add(ModeSetEvent(
+                        modeId: widget.mode.id,
+                        brightnessLevel:
+                            BlocProvider.of<BrightnessLevelBloc>(context).state,
+                        rate: 10.0)); // TODO Changed rate. On real value.
+                  },
+                  borderRadius: BorderRadius.circular(borderRadiusValue),
                   child: Stack(
                     children: [
-                      BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaX: 6.0,
-                          sigmaY: 6.0,
-                        ),
-                        child: const SizedBox(
-                          height: 28,
-                          width: double.infinity,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(borderRadiusValue),
+                        child: Image.network(
+                          widget.mode.imageUrl,
+                          fit: BoxFit.cover,
+                          height: height,
+                          width: _width,
                         ),
                       ),
-                      Container(
-                        height: 28,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200.withOpacity(0.1),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: _getSelectionIcon(
+                            active: state.modeId == widget.mode.id,
+                            color: Styles.primaryColor,
+                            size: 28),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ClipRRect(
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(borderRadiusValue),
                               bottomRight: Radius.circular(borderRadiusValue)),
-                        ),
-                        child: Center(
-                          child: Text(
-                            widget.mode.name,
-                            style: TextStyle(
-                                fontSize: 22,
-                                color: Styles.primaryColor.withOpacity(0.8)),
+                          child: Stack(
+                            children: [
+                              BackdropFilter(
+                                filter: ImageFilter.blur(
+                                  sigmaX: 6.0,
+                                  sigmaY: 6.0,
+                                ),
+                                child: const SizedBox(
+                                  height: 28,
+                                  width: double.infinity,
+                                ),
+                              ),
+                              Container(
+                                height: 28,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200.withOpacity(0.1),
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft:
+                                          Radius.circular(borderRadiusValue),
+                                      bottomRight:
+                                          Radius.circular(borderRadiusValue)),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    widget.mode.name,
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        color: Styles.primaryColor
+                                            .withOpacity(0.8)),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
-                ),
-              )
-            ],
-          ),
-        ));
+                )));
   }
 
-  Icon _getSelectionIcon({required Color color, required double size}) {
-    return widget.active == false
+  Icon _getSelectionIcon(
+      {required Color color, required double size, required bool active}) {
+    return active == false
         ? Icon(
             EvaIcons.radioButtonOff,
             color: color,

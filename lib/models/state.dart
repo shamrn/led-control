@@ -3,7 +3,7 @@ enum StateEnum { inactive, active, off, on, rgb, mode }
 class State {
   int state;
   double brightnessLevel;
-  dynamic mode; // todo
+  int mode;
   List<dynamic> rgb;
   double rate;
 

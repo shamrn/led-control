@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rgb_control/bloc/led_control_bloc/led_control_bloc.dart';
-import 'package:rgb_control/bloc/led_control_bloc/led_control_event.dart';
+import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/section_widget.dart';
 

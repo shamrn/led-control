@@ -2,8 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rgb_control/bloc/led_control_bloc/led_control_bloc.dart';
-import 'package:rgb_control/bloc/led_control_bloc/led_control_state.dart';
+import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
 class PowerButtonWidget extends StatefulWidget {
@@ -16,7 +15,7 @@ class PowerButtonWidget extends StatefulWidget {
 class _PowerButtonWidgetState extends State<PowerButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PowerBloc, ColorState>(
+    return BlocBuilder<PowerBloc, PowerState>(
       builder: (context, state) => ClipOval(
         child: Material(
           color: Colors.transparent,
@@ -31,7 +30,7 @@ class _PowerButtonWidgetState extends State<PowerButtonWidget> {
                   borderRadius: BorderRadius.circular(100),
                   border: Border.all(width: 2.4, color: _getColor(state))),
               child: Icon(
-                state is ColorPowerOffState
+                state is PowerOffState
                     ? EvaIcons.flashOffOutline
                     : EvaIcons.flashOutline,
                 color: _getColor(state),
@@ -44,9 +43,7 @@ class _PowerButtonWidgetState extends State<PowerButtonWidget> {
     );
   }
 
-  Color _getColor(ColorState state) {
-    return state is ColorPowerOnState
-        ? Styles.secondColor
-        : Styles.primaryColor;
+  Color _getColor(PowerState state) {
+    return state is PowerOnState ? Styles.secondColor : Styles.primaryColor;
   }
 }
