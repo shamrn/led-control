@@ -4,6 +4,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dart';
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_bloc.dart';
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_event.dart';
+import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 
 class ColorPaletteWidget extends StatefulWidget {
@@ -38,8 +39,8 @@ class _ColorPaletteWidgetState extends State<ColorPaletteWidget> {
     required Color color,
     required BuildContext context,
   }) {
+    context.read<ModeSetBloc>().reset();
     context.read<PowerBloc>().setInnerOn();
-
     ColorPaletteBloc().add(ColorPaletteSetEvent(
         color: color,
         brightnessLevel: BlocProvider.of<BrightnessLevelBloc>(context).state));

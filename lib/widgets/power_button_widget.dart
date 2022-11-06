@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
@@ -23,6 +24,7 @@ class _PowerButtonWidgetState extends State<PowerButtonWidget> {
             onTap: () {
               HapticFeedback.vibrate();
               context.read<PowerBloc>().switching(state);
+              context.read<ModeSetBloc>().reset();
             },
             child: Container(
               padding: const EdgeInsets.all(8),

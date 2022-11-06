@@ -5,6 +5,7 @@ import 'package:rgb_control/services/led_control/event.dart';
 import 'package:rgb_control/services/led_control/provider.dart';
 
 part 'mode_event.dart';
+
 part 'mode_state.dart';
 
 class ModeBloc extends Bloc<ModeEvent, ModeState> {
@@ -80,5 +81,9 @@ class ModeSetBloc extends Bloc<ModeEvent, ModeSetState> {
         rate: event.rate,
         brightnessLevel: event.brightnessLevel));
     emit(ModeSetState(modeId: event.modeId));
+  }
+
+  void reset() {
+    if (state.modeId != null) emit(ModeSetState(modeId: null));
   }
 }

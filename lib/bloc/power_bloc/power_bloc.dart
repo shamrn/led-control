@@ -4,6 +4,7 @@ import 'package:rgb_control/services/led_control/event.dart';
 import 'package:rgb_control/services/led_control/provider.dart';
 
 part 'power_event.dart';
+
 part 'power_state.dart';
 
 class PowerBloc extends Bloc<PowerEvent, PowerState> {
@@ -23,7 +24,7 @@ class PowerBloc extends Bloc<PowerEvent, PowerState> {
   }
 
   void setInnerOn() {
-    add(PowerOnEvent(inner: true));
+    if (state is PowerOffState) add(PowerOnEvent(inner: true));
   }
 
   void switching(PowerState state) {
