@@ -147,7 +147,7 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
                                       .state,
                               rate: BlocProvider.of<RateBloc>(context).state));
                         },
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(borderRadiusValue),
                         splashFactory: InkRipple.splashFactory,
                       ),
                     ),
