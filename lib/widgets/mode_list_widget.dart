@@ -73,80 +73,85 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
         width: _width,
         height: height,
         child: BlocBuilder<ModeSetBloc, ModeSetState>(
-            builder: (context, state) => InkWell(
-                  onTap: () {
-                    HapticFeedback.vibrate();
-                    context.read<PowerBloc>().setInnerOn();
-                    context.read<ModeSetBloc>().add(ModeSetEvent(
-                        modeId: widget.mode.id,
-                        brightnessLevel:
-                            BlocProvider.of<BrightnessLevelBloc>(context).state,
-                        rate: BlocProvider.of<RateBloc>(context).state));
-                  },
-                  borderRadius: BorderRadius.circular(borderRadiusValue),
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(borderRadiusValue),
-                        child: Image.network(
-                          widget.mode.imageUrl,
-                          fit: BoxFit.cover,
-                          height: height,
-                          width: _width,
-                        ),
+            builder: (context, state) => Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(borderRadiusValue),
+                      child: Image.network(
+                        widget.mode.imageUrl,
+                        fit: BoxFit.cover,
+                        height: height,
+                        width: _width,
                       ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: _getSelectionIcon(
-                            active: state.modeId == widget.mode.id,
-                            color: Styles.primaryColor,
-                            size: 28),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(borderRadiusValue),
-                              bottomRight: Radius.circular(borderRadiusValue)),
-                          child: Stack(
-                            children: [
-                              BackdropFilter(
-                                filter: ImageFilter.blur(
-                                  sigmaX: 6.0,
-                                  sigmaY: 6.0,
-                                ),
-                                child: const SizedBox(
-                                  height: 28,
-                                  width: double.infinity,
-                                ),
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: _getSelectionIcon(
+                          active: state.modeId == widget.mode.id,
+                          color: Styles.primaryColor,
+                          size: 28),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(borderRadiusValue),
+                            bottomRight: Radius.circular(borderRadiusValue)),
+                        child: Stack(
+                          children: [
+                            BackdropFilter(
+                              filter: ImageFilter.blur(
+                                sigmaX: 6.0,
+                                sigmaY: 6.0,
                               ),
-                              Container(
+                              child: const SizedBox(
                                 height: 28,
                                 width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200.withOpacity(0.1),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft:
-                                          Radius.circular(borderRadiusValue),
-                                      bottomRight:
-                                          Radius.circular(borderRadiusValue)),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    widget.mode.name,
-                                    style: TextStyle(
-                                        fontSize: 22,
-                                        color: Styles.primaryColor
-                                            .withOpacity(0.8)),
-                                  ),
+                              ),
+                            ),
+                            Container(
+                              height: 28,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade200.withOpacity(0.1),
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft:
+                                        Radius.circular(borderRadiusValue),
+                                    bottomRight:
+                                        Radius.circular(borderRadiusValue)),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  widget.mode.name,
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      color:
+                                          Styles.primaryColor.withOpacity(0.8)),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          HapticFeedback.vibrate();
+                          context.read<PowerBloc>().setInnerOn();
+                          context.read<ModeSetBloc>().add(ModeSetEvent(
+                              modeId: widget.mode.id,
+                              brightnessLevel:
+                                  BlocProvider.of<BrightnessLevelBloc>(context)
+                                      .state,
+                              rate: BlocProvider.of<RateBloc>(context).state));
+                        },
+                        borderRadius: BorderRadius.circular(20),
+                        splashFactory: InkRipple.splashFactory,
+                      ),
+                    ),
+                  ],
                 )));
   }
 
