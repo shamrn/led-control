@@ -8,6 +8,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
+import 'package:rgb_control/bloc/rate/rate_bloc.dart';
 import 'package:rgb_control/models/mode.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/section_widget.dart';
@@ -19,8 +20,7 @@ class ModeListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const SectionWidget(
-            title: Texts.modeTitle, icon: EvaIcons.activityOutline),
+        const SectionWidget(title: Texts.modeTitle, icon: EvaIcons.gridOutline),
         const SizedBox(
           height: 20,
         ),
@@ -81,7 +81,7 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
                         modeId: widget.mode.id,
                         brightnessLevel:
                             BlocProvider.of<BrightnessLevelBloc>(context).state,
-                        rate: 10.0)); // TODO Changed rate. On real value.
+                        rate: BlocProvider.of<RateBloc>(context).state));
                   },
                   borderRadius: BorderRadius.circular(borderRadiusValue),
                   child: Stack(

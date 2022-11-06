@@ -14,7 +14,7 @@ class BrightnessLevelWidget extends StatelessWidget {
         SectionWidget(
             title: Texts.brightnessLevelTitle, icon: Icons.light_mode_sharp),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         SliderBrightnessLevel()
       ],
@@ -33,11 +33,7 @@ class _SliderBrightnessLevelState extends State<SliderBrightnessLevel> {
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
-      data: SliderThemeData(
-        overlayShape: SliderComponentShape.noOverlay,
-        showValueIndicator: ShowValueIndicator.always,
-        valueIndicatorColor: Styles.secondColor.withOpacity(0.4),
-      ),
+      data: Styles.sliderThemData,
       child: BlocBuilder<BrightnessLevelBloc, double>(
         builder: (context, currentLevel) => Slider.adaptive(
             value: currentLevel,

@@ -4,11 +4,13 @@ import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dar
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_bloc.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
+import 'package:rgb_control/bloc/rate/rate_bloc.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/brightness_level_widget.dart';
 import 'package:rgb_control/widgets/color_palette_widget.dart';
 import 'package:rgb_control/widgets/mode_list_widget.dart';
 import 'package:rgb_control/widgets/power_button_widget.dart';
+import 'package:rgb_control/widgets/rate_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,6 +26,9 @@ class HomeScreen extends StatelessWidget {
             create: (context) => BrightnessLevelBloc()),
         BlocProvider<PowerBloc>(
           create: (context) => PowerBloc(),
+        ),
+        BlocProvider<RateBloc>(
+          create: (context) => RateBloc(),
         ),
         BlocProvider<ModeBloc>(
           create: (context) => ModeBloc()..add(ModeLoadEvent()),
@@ -50,6 +55,10 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       children: const <Widget>[
                         BrightnessLevelWidget(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        RateWidget(),
                         SizedBox(
                           height: 20,
                         ),

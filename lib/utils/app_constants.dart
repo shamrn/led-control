@@ -10,6 +10,8 @@ class Api {
 class Texts {
   static const String brightnessLevelTitle = 'Яркость';
   static const String modeTitle = 'Режимы';
+  static const String rateTitle = 'Скорость';
+  static const String rateHelpText = 'Скорость применяться только для режимов';
 }
 
 // Styles
@@ -26,6 +28,12 @@ class Styles {
   static const double horizontalPrimaryPadding = 20;
   static const double bottomPrimaryPadding = 40;
   static const double modeCardSpacing = 8;
+
+  static SliderThemeData sliderThemData = SliderThemeData(
+    overlayShape: SliderComponentShape.noOverlay,
+    showValueIndicator: ShowValueIndicator.always,
+    valueIndicatorColor: Styles.secondColor.withOpacity(0.4),
+  );
 }
 
 // Brightness Level
