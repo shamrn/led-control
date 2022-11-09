@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 // Api
 class Api {
-  static const host = '192.168.0.13';
-  static const wsPort = '8765';
-  static const wsHost = 'ws://$host';
-  static const httpPort = '8000';
-  static const httpHost = 'http://$host';
+  static const rootHost = '192.168.0.13';
+  static const wsRootUrl = 'ws://$rootHost:8765';
+  static const httpRootUrl = 'http://$rootHost:8000/api/v1/';
+  static const modeEndpoint = 'leds/modes/';
+
+  // mock token
+  static const authToken = 'Token Nzk2NDkyMzQ0NDQ6YXNkZmdoamsyMQ==';
 }
 
 // Texts

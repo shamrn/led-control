@@ -12,6 +12,8 @@ class ModeLoadedState extends ModeState {
   ModeLoadedState({required this.modes});
 }
 
+class ModeErrorState extends ModeState {}
+
 class ModeSetState extends ModeState {
   int? modeId;
 

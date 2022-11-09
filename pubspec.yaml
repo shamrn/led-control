@@ -49,6 +49,9 @@ dependencies:
   # a cross-platform implementation of that API that communicates over an underlying StreamChannel.
   web_socket_channel: ^2.2.0
 
+  # Future-based API for HTTP requests.
+  http: ^0.13.5
+
   # Flutter package for Eva Icons. Eva Icons is a pack of more than 480 beautifully crafted
   # Open Source icons for common actions and items.
   eva_icons_flutter: ^3.1.0
@@ -56,6 +59,7 @@ dependencies:
   # Loading animation or loading spiner or loader. It's used to show loading animation when the app
   # is in loading state or something is processing for uncertain time.
   loading_animation_widget: ^1.2.0+3
+
 
 dev_dependencies:
   flutter_test:

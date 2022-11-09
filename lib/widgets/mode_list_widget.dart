@@ -33,7 +33,7 @@ class ModeListWidget extends StatelessWidget {
                 runSpacing: 12,
                 direction: Axis.horizontal,
                 children: [
-                  if (state is ModeLoadingState)
+                  if (state is ModeLoadingState || state is ModeErrorState)
                     LoadingAnimationWidget.flickr(
                         rightDotColor: Colors.pink,
                         leftDotColor: Styles.secondColor,
