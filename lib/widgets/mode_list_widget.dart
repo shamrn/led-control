@@ -60,7 +60,6 @@ class ModeCardWidget extends StatefulWidget {
 
 class _ModeCardWidgetState extends State<ModeCardWidget> {
   double borderRadiusValue = 10;
-  double height = 120;
 
   double get _width =>
       MediaQuery.of(context).size.width / 2 -
@@ -69,6 +68,8 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height / 7;
+    double blurSectionHeight = height / 3.5;
     return SizedBox(
         width: _width,
         height: height,
@@ -89,7 +90,7 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
                       child: _getSelectionIcon(
                           active: state.modeId == widget.mode.id,
                           color: Styles.primaryColor,
-                          size: 28),
+                          size: height / 3.8),
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -104,13 +105,13 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
                                 sigmaX: 6.0,
                                 sigmaY: 6.0,
                               ),
-                              child: const SizedBox(
-                                height: 28,
+                              child: SizedBox(
+                                height: blurSectionHeight,
                                 width: double.infinity,
                               ),
                             ),
                             Container(
-                              height: 28,
+                              height: blurSectionHeight,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: Colors.grey.shade200.withOpacity(0.1),

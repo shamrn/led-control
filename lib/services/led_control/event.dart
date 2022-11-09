@@ -14,14 +14,14 @@ class Event {
     return {
       'event': EventEnum.setColor.index,
       'rgb': rgb,
-      'brightness_level': brightnessLevel
+      'brightness': brightnessLevel
     };
   }
 
   Map<String, dynamic> setBrightnessLevel({required brightnessLevel}) {
     return {
       'event': EventEnum.setBrightnessLevel.index,
-      'brightness_level': brightnessLevel
+      'brightness': brightnessLevel
     };
   }
 
@@ -39,7 +39,7 @@ class Event {
     return {
       'event': EventEnum.setMode.index,
       'mode': modeId,
-      'brightness_level': brightnessLevel,
+      'brightness': brightnessLevel,
       'rate': rate
     };
   }
