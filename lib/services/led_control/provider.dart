@@ -6,7 +6,7 @@ import 'package:web_socket_channel/io.dart';
 class WebSocketManager {
   static final WebSocketManager _singleton = WebSocketManager._internal();
   static IOWebSocketChannel channel =
-      IOWebSocketChannel.connect(Uri.parse('${Api.host}:${Api.port}'));
+      IOWebSocketChannel.connect(Uri.parse('${Api.wsHost}:${Api.wsPort}'));
 
   factory WebSocketManager() {
     return _singleton;

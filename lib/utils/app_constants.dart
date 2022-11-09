@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 // Api
 class Api {
-  static const host = 'ws://192.168.0.13';
-  static const port = '8765';
+  static const host = '192.168.0.13';
+  static const wsPort = '8765';
+  static const wsHost = 'ws://$host';
+  static const httpPort = '8000';
+  static const httpHost = 'http://$host';
 }
 
 // Texts
