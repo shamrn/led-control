@@ -8,7 +8,7 @@ class ModeProvider {
   Future<List<Mode>> getModes() async {
     final http.Response response = await http.get(
         Uri.parse('${Api.httpRootUrl}${Api.modeEndpoint}'),
-        headers: {'Authorization': Api.authToken});
+        headers: Api.authHeader);
     if (response.statusCode == 200) {
       final List<dynamic> modeJson =
           json.decode(utf8.decode(response.bodyBytes));
