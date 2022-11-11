@@ -6,21 +6,20 @@ import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 import 'package:rgb_control/bloc/rate/rate_bloc.dart';
 import 'package:rgb_control/models/led_state.dart';
+import 'package:rgb_control/models/rgb.dart';
 
 void handler({required BuildContext context, required LedState ledState}) {
-  List<dynamic> rgb = ledState.rgb.toList();
-
   BlocProvider.of<ColorPaletteBloc>(context)
-      .emit(Color.fromRGBO(rgb[0], rgb[1], rgb[2], 1));
+      .emit(RGB().rgbToHex(rgb: ledState.rgb.toList()));
   BlocProvider.of<BrightnessLevelBloc>(context).emit(ledState.brightness);
   BlocProvider.of<RateBloc>(context).emit(ledState.rate);
   BlocProvider.of<ModeSetBloc>(context)
       .emit(ModeSetState(modeId: ledState.mode));
 
   PowerBloc powerBloc = BlocProvider.of<PowerBloc>(context);
-    if (ledState.state == LedStateEnum.off.index) {
+  if (ledState.state == LedStateEnum.off.index) {
     powerBloc.emit(PowerOffState());
   } else {
-      powerBloc.emit(PowerOnState());
-    }
+    powerBloc.emit(PowerOnState());
+  }
 }

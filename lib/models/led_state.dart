@@ -4,7 +4,7 @@ class LedState {
   int state;
   double brightness;
   int? mode;
-  List<dynamic> rgb;
+  List<int> rgb;
   double rate;
 
   LedState(
@@ -19,7 +19,7 @@ class LedState {
       state: json['state'],
       brightness: json['brightness'],
       mode: json['mode'],
-      rgb: json['rgb'],
+      rgb: json['rgb'].cast<int>(),
       rate: json['rate']
     );
   }
