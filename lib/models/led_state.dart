@@ -1,23 +1,23 @@
-enum StateEnum { inactive, active, off, on, rgb, mode }
+enum LedStateEnum { inactive, active, off, on, rgb, mode }
 
-class State {
+class LedState {
   int state;
-  double brightnessLevel;
-  int mode;
+  double brightness;
+  int? mode;
   List<dynamic> rgb;
   double rate;
 
-  State(
+  LedState(
       {required this.state,
-      required this.brightnessLevel,
+      required this.brightness,
       required this.mode,
       required this.rgb,
       required this.rate});
 
-  factory State.fromJson(Map<String, dynamic> json) {
-    return State(
+  factory LedState.fromJson(Map<String, dynamic> json) {
+    return LedState(
       state: json['state'],
-      brightnessLevel: json['brightness_level'],
+      brightness: json['brightness'],
       mode: json['mode'],
       rgb: json['rgb'],
       rate: json['rate']
