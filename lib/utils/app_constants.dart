@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 // Api
 class Api {
   static const rootHost = '192.168.0.13';
-  static const wsRootUrl = 'ws://$rootHost:8765';
-  static const httpRootUrl = 'http://$rootHost:8000/api/v1/';
+  static const port = '8000';
+  static const wsRootUrl = 'ws://$rootHost:$port/';
+  static const ledControlWsEndpoint = 'ws/api/leds/';
+  static const httpRootUrl = 'http://$rootHost:$port/api/v1/';
   static const modeEndpoint = 'leds/modes/';
 
-  // mock token
-  static const authToken = 'Token Nzk2NDkyMzQ0NDQ6YXNkZmdoamsyMQ==';
+  // mock data
+  static const authHeader = {
+    'Authorization': 'Token Nzk2NDkyMzQ0NDQ6YXNkZmdoamsyMQ=='
+  };
+  static const poolQuery = 'pool_id=1';
 }
 
 // Texts
