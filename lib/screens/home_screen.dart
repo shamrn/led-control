@@ -5,7 +5,7 @@ import 'package:rgb_control/bloc/color_palette_bloc/color_palette_bloc.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 import 'package:rgb_control/bloc/rate/rate_bloc.dart';
-import 'package:rgb_control/services/led_control/provider.dart';
+import 'package:rgb_control/services/led_control/led_control_websocket.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:rgb_control/widgets/brightness_level_widget.dart';
 import 'package:rgb_control/widgets/color_palette_widget.dart';

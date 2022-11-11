@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_event.dart';
-import 'package:rgb_control/services/led_control/event.dart';
-import 'package:rgb_control/services/led_control/provider.dart';
+import 'package:rgb_control/services/led_control/led_control_event.dart';
+import 'package:rgb_control/services/led_control/led_control_websocket.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
 class ColorPaletteBloc extends Bloc<ColorPaletteEvent, Color> {

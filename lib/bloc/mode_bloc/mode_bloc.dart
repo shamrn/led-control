@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rgb_control/models/mode.dart';
-import 'package:rgb_control/services/led_control/event.dart';
-import 'package:rgb_control/services/led_control/provider.dart';
+import 'package:rgb_control/services/led_control/led_control_event.dart';
+import 'package:rgb_control/services/led_control/led_control_websocket.dart';
 import 'package:rgb_control/services/mode/mode_repository.dart';
 
 part 'mode_event.dart';

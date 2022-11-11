@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:rgb_control/models/led_state.dart';
-import 'package:rgb_control/services/led_control/handler.dart';
+import 'package:rgb_control/services/led_control/led_control_handler.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 import 'package:web_socket_channel/io.dart';
 

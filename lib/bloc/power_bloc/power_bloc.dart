@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:rgb_control/services/led_control/event.dart';
-import 'package:rgb_control/services/led_control/provider.dart';
+import 'package:rgb_control/services/led_control/led_control_event.dart';
+import 'package:rgb_control/services/led_control/led_control_websocket.dart';
 
 part 'power_event.dart';
 
