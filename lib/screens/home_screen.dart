@@ -36,12 +36,12 @@ class HomeScreen extends StatelessWidget {
       BlocProvider<ModeSetBloc>(
         create: (context) => ModeSetBloc(),
       ),
-    ], child: const LedControlScreen());
+    ], child: const BodyHomeScreen());
   }
 }
 
-class LedControlScreen extends StatelessWidget {
-  const LedControlScreen({Key? key}) : super(key: key);
+class BodyHomeScreen extends StatelessWidget {
+  const BodyHomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

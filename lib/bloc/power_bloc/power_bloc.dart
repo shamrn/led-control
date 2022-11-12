@@ -19,7 +19,7 @@ class PowerBloc extends Bloc<PowerEvent, PowerState> {
   }
 
   void _onColorPowerOff(PowerOffEvent event, Emitter<PowerState> emit) {
-    WebSocketManager().addEvent(Event().off());
+    if (!event.inner) WebSocketManager().addEvent(Event().off());
     emit(PowerOffState());
   }
 

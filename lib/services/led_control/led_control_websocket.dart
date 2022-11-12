@@ -24,7 +24,9 @@ class WebSocketManager {
 
   listen(BuildContext context) async {
     channel.stream.listen((msg) {
-      handler(context: context, ledState: LedState.fromJson(json.decode(msg)));
-    }, onError: (error) {});
+      ledControlHandler(
+          context: context, ledState: LedState.fromJson(json.decode(msg)));
+    }, onError: (error) {
+    });
   }
 }

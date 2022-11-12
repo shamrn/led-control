@@ -8,4 +8,8 @@ class PowerOnEvent extends PowerEvent {
   PowerOnEvent({this.inner = false});
 }
 
-class PowerOffEvent extends PowerEvent {}
+class PowerOffEvent extends PowerEvent {
+  bool inner;
+
+  PowerOffEvent({this.inner = false});
+}

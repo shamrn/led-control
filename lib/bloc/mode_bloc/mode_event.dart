@@ -6,12 +6,14 @@ abstract class ModeEvent {}
 class ModeLoadEvent extends ModeEvent {}
 
 class ModeSetEvent extends ModeEvent {
+  final bool inner;
   final int modeId;
-  final double brightnessLevel;
-  final double rate;
+  final double? brightnessLevel;
+  final double? rate;
 
   ModeSetEvent(
-      {required this.modeId,
-      required this.brightnessLevel,
-      required this.rate});
+      {this.inner = false,
+      required this.modeId,
+      this.brightnessLevel,
+      this.rate});
 }

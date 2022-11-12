@@ -11,7 +11,9 @@ class RateBloc extends Bloc<RateEvent, double> {
   }
 
   void _onRateSet(RateSetEvent event, Emitter<double> emit) {
-    WebSocketManager().addEvent(Event().setRate(rate: event.level));
+    if (!event.inner) {
+      WebSocketManager().addEvent(Event().setRate(rate: event.level));
+    }
     emit(event.level);
   }
 }
