@@ -9,7 +9,7 @@ import 'package:web_socket_channel/io.dart';
 class WebSocketManager {
   static final WebSocketManager _singleton = WebSocketManager._internal();
   static IOWebSocketChannel channel = IOWebSocketChannel.connect(
-      Uri.parse('${Api.wsRootUrl}${Api.ledControlWsEndpoint}?${Api.poolQuery}'),
+      Uri.parse('${Api.wsUri}${Api.ledControlWsEndpoint}?${Api.poolQuery}'),
       headers: Api.authHeader);
 
   factory WebSocketManager() {

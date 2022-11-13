@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 
 // Api
 class Api {
-  static const rootHost = '192.168.0.13';
-  static const port = '8000';
-  static const wsRootUrl = 'ws://$rootHost:$port/';
+  static late String host;
+  static late String port;
+  static String wsUri = 'ws://$host:$port/';
+  static String httpUri = 'http://$host:$port/api/v1/';
+
   static const ledControlWsEndpoint = 'ws/api/leds/';
-  static const httpRootUrl = 'http://$rootHost:$port/api/v1/';
   static const modeEndpoint = 'leds/modes/';
 
   // mock data
   static const authHeader = {
-    'Authorization': 'Token Nzk2NDkyMzQ0NDQ6YXNkZmdoamsyMQ=='
+    'Authorization': 'Token d1d7336fa886bd0db6bea425fa653f0e3ad79f21'
   };
   static const poolQuery = 'pool_id=1';
 }
@@ -22,6 +23,11 @@ class Texts {
   static const String modeTitle = 'Режимы';
   static const String rateTitle = 'Скорость';
   static const String rateHelpText = 'Скорость применяться только для режимов';
+
+  static const String validationRequiredFieldText = 'Обязательное поле.';
+  static const String ipFieldName = 'Ip';
+  static const String portFieldName = 'Порт';
+  static const String connectButtonText = 'Подключиться';
 }
 
 // Styles

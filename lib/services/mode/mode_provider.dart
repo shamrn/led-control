@@ -8,7 +8,7 @@ import 'package:rgb_control/utils/app_constants.dart';
 class ModeProvider {
   Future<List<Mode>> getModes() async {
     final http.Response response = await http.get(
-        Uri.parse('${Api.httpRootUrl}${Api.modeEndpoint}'),
+        Uri.parse('${Api.httpUri}${Api.modeEndpoint}'),
         headers: Api.authHeader);
     if (response.statusCode == HttpStatus.ok) {
       final List<dynamic> modeJson =
