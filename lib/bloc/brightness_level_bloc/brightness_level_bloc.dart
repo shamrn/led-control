@@ -14,7 +14,7 @@ class BrightnessLevelBloc extends Bloc<BrightnessLevelEvent, double> {
       BrightnessLevelSetEvent event, Emitter<double> emit) {
     if (!event.inner) {
       WebSocketManager()
-          .addEvent(Event().setBrightnessLevel(brightnessLevel: event.level));
+          .addEvent(Event.setBrightnessLevel(brightnessLevel: event.level));
     }
     emit(event.level);
   }

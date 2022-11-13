@@ -1,15 +1,14 @@
 part of 'mode_bloc.dart';
 
-@immutable
 abstract class ModeEvent {}
 
 class ModeLoadEvent extends ModeEvent {}
 
 class ModeSetEvent extends ModeEvent {
-  final bool inner;
-  final int modeId;
-  final double? brightnessLevel;
-  final double? rate;
+  bool inner;
+  int modeId;
+  double? brightnessLevel;
+  double? rate;
 
   ModeSetEvent(
       {this.inner = false,

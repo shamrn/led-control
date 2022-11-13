@@ -14,12 +14,12 @@ class PowerBloc extends Bloc<PowerEvent, PowerState> {
   }
 
   void _onColorPowerOn(PowerOnEvent event, Emitter<PowerState> emit) {
-    if (!event.inner) WebSocketManager().addEvent(Event().on());
+    if (!event.inner) WebSocketManager().addEvent(Event.on());
     emit(PowerOnState());
   }
 
   void _onColorPowerOff(PowerOffEvent event, Emitter<PowerState> emit) {
-    if (!event.inner) WebSocketManager().addEvent(Event().off());
+    if (!event.inner) WebSocketManager().addEvent(Event.off());
     emit(PowerOffState());
   }
 

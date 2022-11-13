@@ -19,7 +19,7 @@ void ledControlHandler(
 
   BlocProvider.of<ColorPaletteBloc>(context).add(ColorPaletteSetEvent(
       inner: true,
-      color: RGB().rgbToHex(rgb: ledState.rgb.toList()),
+      color: RGB.rgbToHex(rgb: ledState.rgb.toList()),
       brightnessLevel: brightnessLevelBloc.state));
 
   BlocProvider.of<RateBloc>(context)

@@ -20,11 +20,13 @@ class Api {
 
 // Texts
 class Texts {
+  // Home screen
   static const String brightnessLevelTitle = 'Яркость';
   static const String modeTitle = 'Режимы';
   static const String rateTitle = 'Скорость';
   static const String rateHelpText = 'Скорость применяться только для режимов';
 
+  // Configuration entry screen
   static const String validationRequiredFieldText = 'Обязательное поле.';
   static const String ipFieldName = 'Ip';
   static const String portFieldName = 'Порт';
@@ -66,5 +68,5 @@ class BrightnessLevel {
 class Rate {
   static const double maxLevel = 100.0;
   static const double minLevel = 0.1;
-  static const double initLevel = 50.0;
+  static const double initLevel = maxLevel / 2;
 }

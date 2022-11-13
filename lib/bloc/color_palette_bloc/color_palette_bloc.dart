@@ -13,8 +13,8 @@ class ColorPaletteBloc extends Bloc<ColorPaletteEvent, Color> {
 
   void _onColorPaletteSet(ColorPaletteSetEvent event, Emitter<Color> emit) {
     if (!event.inner) {
-      WebSocketManager().addEvent(Event().setColor(
-          rgb: RGB().colorToRgb(color: event.color),
+      WebSocketManager().addEvent(Event.setColor(
+          rgb: RGB.colorToRgb(color: event.color),
           brightnessLevel: event.brightnessLevel));
     }
     emit(event.color);
