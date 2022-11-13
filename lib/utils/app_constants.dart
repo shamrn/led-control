@@ -10,11 +10,12 @@ class Api {
   static const ledControlWsEndpoint = 'ws/api/leds/';
   static const modeEndpoint = 'leds/modes/';
 
-  // mock data
-  static const authHeader = {
-    'Authorization': 'Token d1d7336fa886bd0db6bea425fa653f0e3ad79f21'
+  static late String token;
+  static late String poolId;
+  static Map<String, String> authHeader = {
+    'Authorization': 'Token $token'
   };
-  static const poolQuery = 'pool_id=1';
+  static String poolQuery = 'pool_id=$poolId';
 }
 
 // Texts
@@ -27,6 +28,8 @@ class Texts {
   static const String validationRequiredFieldText = 'Обязательное поле.';
   static const String ipFieldName = 'Ip';
   static const String portFieldName = 'Порт';
+  static const String tokenFieldName = 'Токен авторизации';
+  static const String poolIdFieldName = 'Идентификатор бассейна';
   static const String connectButtonText = 'Подключиться';
 }
 

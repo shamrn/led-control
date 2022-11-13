@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
 class FormWidget extends StatefulWidget {
+  TextInputType keyboardType;
   String name;
   TextEditingController textController;
 
-  FormWidget({Key? key, required this.name, required this.textController})
+  FormWidget(
+      {Key? key,
+      required this.keyboardType,
+      required this.name,
+      required this.textController})
       : super(key: key);
 
   @override
@@ -23,7 +28,7 @@ class _FormWidgetState extends State<FormWidget> {
         }
         return null;
       },
-      keyboardType: TextInputType.number,
+      keyboardType: widget.keyboardType,
       style: const TextStyle(color: Styles.primaryColor),
       focusNode: FocusNode(),
       autofocus: true,

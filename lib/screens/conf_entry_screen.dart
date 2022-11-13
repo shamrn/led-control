@@ -12,6 +12,9 @@ class ConfEntryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController hostController = TextEditingController();
     TextEditingController portController = TextEditingController();
+    TextEditingController tokenController = TextEditingController();
+    TextEditingController poolIdController = TextEditingController();
+
     return Scaffold(
         body: SafeArea(
             child: Padding(
@@ -24,6 +27,7 @@ class ConfEntryScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FormWidget(
+                keyboardType: TextInputType.number,
                 name: Texts.ipFieldName,
                 textController: hostController,
               ),
@@ -31,7 +35,23 @@ class ConfEntryScreen extends StatelessWidget {
                 height: 10,
               ),
               FormWidget(
-                  name: Texts.portFieldName, textController: portController),
+                  keyboardType: TextInputType.number,
+                  name: Texts.portFieldName,
+                  textController: portController),
+              const SizedBox(
+                height: 10,
+              ),
+              FormWidget(
+                  keyboardType: TextInputType.text,
+                  name: Texts.tokenFieldName,
+                  textController: tokenController),
+              const SizedBox(
+                height: 10,
+              ),
+              FormWidget(
+                  keyboardType: TextInputType.number,
+                  name: Texts.poolIdFieldName,
+                  textController: poolIdController),
               const SizedBox(
                 height: 20,
               ),
@@ -50,6 +70,8 @@ class ConfEntryScreen extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       Api.host = hostController.text;
                       Api.port = portController.text;
+                      Api.token = tokenController.text;
+                      Api.poolId = poolIdController.text;
 
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           '/home_screen', (Route<dynamic> route) => false);
