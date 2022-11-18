@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rgb_control/bloc/brightness_bloc/brightness_bloc.dart';
-import 'package:rgb_control/bloc/color_palette_bloc/color_palette_bloc.dart';
-import 'package:rgb_control/bloc/color_palette_bloc/color_palette_event.dart';
+import 'package:rgb_control/bloc/color_picker_bloc/color_picker_bloc.dart';
+import 'package:rgb_control/bloc/color_picker_bloc/color_picker_event.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 import 'package:rgb_control/bloc/rate/rate_bloc.dart';
@@ -16,7 +16,7 @@ void ledControlHandler(
   brightnessBloc
       .add(BrightnessSetEvent(inner: true, level: ledState.brightness));
 
-  BlocProvider.of<ColorPaletteBloc>(context).add(ColorPaletteSetEvent(
+  BlocProvider.of<ColorPickerBloc>(context).add(ColorPickerSetEvent(
       inner: true,
       color: RGB.rgbToHex(rgb: ledState.rgb.toList()),
       brightness: brightnessBloc.state));

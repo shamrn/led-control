@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:rgb_control/bloc/brightness_bloc/brightness_bloc.dart';
-import 'package:rgb_control/bloc/color_palette_bloc/color_palette_bloc.dart';
-import 'package:rgb_control/bloc/color_palette_bloc/color_palette_event.dart';
+import 'package:rgb_control/bloc/color_picker_bloc/color_picker_bloc.dart';
+import 'package:rgb_control/bloc/color_picker_bloc/color_picker_event.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 
-class ColorPaletteWidget extends StatefulWidget {
-  const ColorPaletteWidget({Key? key}) : super(key: key);
+class ColorPickerWidget extends StatefulWidget {
+  const ColorPickerWidget({Key? key}) : super(key: key);
 
   @override
-  State<ColorPaletteWidget> createState() => _ColorPaletteWidgetState();
+  State<ColorPickerWidget> createState() => _ColorPickerWidgetState();
 }
 
-class _ColorPaletteWidgetState extends State<ColorPaletteWidget> {
+class _ColorPickerWidgetState extends State<ColorPickerWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ColorPaletteBloc, Color>(
+    return BlocBuilder<ColorPickerBloc, Color>(
       builder: (context, currentColor) {
         return ColorPicker(
           pickerColor: currentColor,
@@ -41,7 +41,7 @@ class _ColorPaletteWidgetState extends State<ColorPaletteWidget> {
   }) {
     context.read<ModeSetBloc>().reset();
     context.read<PowerBloc>().setInnerOn();
-    ColorPaletteBloc().add(ColorPaletteSetEvent(
+    ColorPickerBloc().add(ColorPickerSetEvent(
         color: color,
         brightness: BlocProvider.of<BrightnessBloc>(context).state));
   }
