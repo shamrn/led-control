@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dart';
+import 'package:rgb_control/bloc/brightness_bloc/brightness_bloc.dart';
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_bloc.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 import 'package:rgb_control/bloc/rate/rate_bloc.dart';
 import 'package:rgb_control/services/led_control/led_control_websocket.dart';
 import 'package:rgb_control/utils/app_constants.dart';
-import 'package:rgb_control/widgets/brightness_level_widget.dart';
+import 'package:rgb_control/widgets/brightness_widget.dart';
 import 'package:rgb_control/widgets/color_palette_widget.dart';
 import 'package:rgb_control/widgets/mode_list_widget.dart';
 import 'package:rgb_control/widgets/power_button_widget.dart';
@@ -22,8 +22,8 @@ class HomeScreen extends StatelessWidget {
       BlocProvider<ColorPaletteBloc>(
         create: (context) => ColorPaletteBloc(),
       ),
-      BlocProvider<BrightnessLevelBloc>(
-          create: (context) => BrightnessLevelBloc()),
+      BlocProvider<BrightnessBloc>(
+          create: (context) => BrightnessBloc()),
       BlocProvider<PowerBloc>(
         create: (context) => PowerBloc(),
       ),
@@ -63,7 +63,7 @@ class BodyHomeScreen extends StatelessWidget {
                       bottom: Styles.bottomPrimaryPadding),
                   child: Column(
                     children: const <Widget>[
-                      BrightnessLevelWidget(),
+                      BrightnessWidget(),
                       SizedBox(
                         height: 20,
                       ),

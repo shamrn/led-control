@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dart';
+import 'package:rgb_control/bloc/brightness_bloc/brightness_bloc.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
 import 'package:rgb_control/bloc/power_bloc/power_bloc.dart';
 import 'package:rgb_control/bloc/rate/rate_bloc.dart';
@@ -143,8 +143,8 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
                           context.read<PowerBloc>().setInnerOn();
                           context.read<ModeSetBloc>().add(ModeSetEvent(
                               modeId: widget.mode.id,
-                              brightnessLevel:
-                                  BlocProvider.of<BrightnessLevelBloc>(context)
+                              brightness:
+                                  BlocProvider.of<BrightnessBloc>(context)
                                       .state,
                               rate: BlocProvider.of<RateBloc>(context).state));
                         },

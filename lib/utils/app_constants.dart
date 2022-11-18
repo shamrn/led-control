@@ -21,7 +21,7 @@ class Api {
 // Texts
 class Texts {
   // Home screen
-  static const String brightnessLevelTitle = 'Яркость';
+  static const String brightnessTitle = 'Яркость';
   static const String modeTitle = 'Режимы';
   static const String rateTitle = 'Скорость';
   static const String rateHelpText = 'Скорость применяться только для режимов';
@@ -57,8 +57,8 @@ class Styles {
   );
 }
 
-// Brightness Level
-class BrightnessLevel {
+// Brightness level
+class Brightness {
   static const double maxLevel = 100.0;
   static const double minLevel = 0.1;
   static const double initLevel = maxLevel;

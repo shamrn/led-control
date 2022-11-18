@@ -1,4 +1,4 @@
-enum EventEnum { off, on, setColor, setMode, setBrightnessLevel, setRate }
+enum EventEnum { off, on, setColor, setMode, setBrightness, setRate }
 
 class Event {
   static Map<String, int> off() {
@@ -10,18 +10,18 @@ class Event {
   }
 
   static Map<String, dynamic> setColor(
-      {required List<int> rgb, required double brightnessLevel}) {
+      {required List<int> rgb, required double brightness}) {
     return {
       'event': EventEnum.setColor.index,
       'rgb': rgb,
-      'brightness': brightnessLevel
+      'brightness': brightness
     };
   }
 
-  static Map<String, dynamic> setBrightnessLevel({required brightnessLevel}) {
+  static Map<String, dynamic> setBrightness({required brightness}) {
     return {
-      'event': EventEnum.setBrightnessLevel.index,
-      'brightness': brightnessLevel
+      'event': EventEnum.setBrightness.index,
+      'brightness': brightness
     };
   }
 
@@ -32,11 +32,11 @@ class Event {
   static Map<String, dynamic> setMode(
       {required int modeId,
       required double rate,
-      required double brightnessLevel}) {
+      required double brightness}) {
     return {
       'event': EventEnum.setMode.index,
       'mode': modeId,
-      'brightness': brightnessLevel,
+      'brightness': brightness,
       'rate': rate
     };
   }

@@ -35,7 +35,7 @@ class ModeSetBloc extends Bloc<ModeEvent, ModeSetState> {
       WebSocketManager().addEvent(Event.setMode(
           modeId: event.modeId,
           rate: event.rate!,
-          brightnessLevel: event.brightnessLevel!));
+          brightness: event.brightness!));
     }
     emit(ModeSetState(modeId: event.modeId));
   }

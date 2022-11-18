@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dart';
+import 'package:rgb_control/bloc/brightness_bloc/brightness_bloc.dart';
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_bloc.dart';
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_event.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
@@ -43,6 +43,6 @@ class _ColorPaletteWidgetState extends State<ColorPaletteWidget> {
     context.read<PowerBloc>().setInnerOn();
     ColorPaletteBloc().add(ColorPaletteSetEvent(
         color: color,
-        brightnessLevel: BlocProvider.of<BrightnessLevelBloc>(context).state));
+        brightness: BlocProvider.of<BrightnessBloc>(context).state));
   }
 }

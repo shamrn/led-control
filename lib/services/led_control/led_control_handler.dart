@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rgb_control/bloc/brightness_level_bloc/brightness_level_bloc.dart';
+import 'package:rgb_control/bloc/brightness_bloc/brightness_bloc.dart';
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_bloc.dart';
 import 'package:rgb_control/bloc/color_palette_bloc/color_palette_event.dart';
 import 'package:rgb_control/bloc/mode_bloc/mode_bloc.dart';
@@ -12,15 +12,14 @@ import 'package:rgb_control/models/rgb.dart';
 // TODO Change to cleaner code.
 void ledControlHandler(
     {required BuildContext context, required LedState ledState}) {
-  BrightnessLevelBloc brightnessLevelBloc =
-      BlocProvider.of<BrightnessLevelBloc>(context);
-  brightnessLevelBloc
-      .add(BrightnessLevelSetEvent(inner: true, level: ledState.brightness));
+  BrightnessBloc brightnessBloc = BlocProvider.of<BrightnessBloc>(context);
+  brightnessBloc
+      .add(BrightnessSetEvent(inner: true, level: ledState.brightness));
 
   BlocProvider.of<ColorPaletteBloc>(context).add(ColorPaletteSetEvent(
       inner: true,
       color: RGB.rgbToHex(rgb: ledState.rgb.toList()),
-      brightnessLevel: brightnessLevelBloc.state));
+      brightness: brightnessBloc.state));
 
   BlocProvider.of<RateBloc>(context)
       .add(RateSetEvent(inner: true, level: ledState.rate));
