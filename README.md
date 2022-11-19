@@ -1,16 +1,16 @@
-# rgb_control
+# Led control
 
-Flutter project to control rgb leds
+----
 
-## Getting Started
+## Application for led control
 
-This project is a starting point for a Flutter application.
+---
+## Stack technology
+- Flutter ( A set of development tools for cross-platform applications. )
+- Bloc ( State management. )
+- Websockets ( Network protocol for bidirectional network connection. )
 
-A few resources to get you started if this is your first Flutter project:
+---
+# Example:
+![alt text] (https://i.yapx.ru/U1wAv.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
