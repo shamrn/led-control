@@ -47,7 +47,7 @@ class Styles {
       TextStyle(color: primaryColor, fontSize: 22);
 
   static const double horizontalPrimaryPadding = 20;
-  static const double bottomPrimaryPadding = 40;
+  static const double bottomPrimaryPadding = 60;
   static const double modeCardSpacing = 8;
 
   static SliderThemeData sliderThemData = SliderThemeData(
