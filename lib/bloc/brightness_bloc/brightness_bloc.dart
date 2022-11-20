@@ -13,8 +13,7 @@ class BrightnessBloc extends Bloc<BrightnessEvent, double> {
   void _onBrightnessSet(
       BrightnessSetEvent event, Emitter<double> emit) {
     if (!event.inner) {
-      WebSocketManager()
-          .addEvent(Event.setBrightness(brightness: event.level));
+      WebSocketManager().addEvent(Event.setBrightness(brightness: event.level));
     }
     emit(event.level);
   }

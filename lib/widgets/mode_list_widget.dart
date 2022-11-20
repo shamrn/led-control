@@ -62,9 +62,9 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
   double borderRadiusValue = 10;
 
   double get _width =>
-      MediaQuery.of(context).size.width / 2 -
-      Styles.horizontalPrimaryPadding -
-      Styles.modeCardSpacing;
+      (MediaQuery.of(context).size.width -
+      (Styles.horizontalPrimaryPadding * 2) -
+      Styles.modeCardSpacing) / 2;
 
   @override
   Widget build(BuildContext context) {

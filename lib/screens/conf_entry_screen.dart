@@ -58,8 +58,9 @@ class ConfEntryScreen extends StatelessWidget {
               OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Styles.secondColor,
-                    side:
-                        const BorderSide(width: 0.4, color: Styles.secondColor),
+                    side: const BorderSide(
+                        width: 0.4, color: Styles.secondColor
+                    ),
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 29, vertical: 17),
@@ -68,6 +69,8 @@ class ConfEntryScreen extends StatelessWidget {
                     HapticFeedback.vibrate();
 
                     if (_formKey.currentState!.validate()) {
+
+                      // Saving entered data to Api data
                       Api.host = hostController.text;
                       Api.port = portController.text;
                       Api.token = tokenController.text;

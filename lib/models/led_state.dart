@@ -1,7 +1,7 @@
 enum LedStateEnum { inactive, active, off, on, rgb, mode }
 
 class LedState {
-  int state;
+  LedStateEnum state;
   double brightness;
   int? mode;
   List<int> rgb;
@@ -16,7 +16,7 @@ class LedState {
 
   factory LedState.fromJson(Map<String, dynamic> json) {
     return LedState(
-      state: json['state'],
+      state: LedStateEnum.values[json['state']],
       brightness: json['brightness'],
       mode: json['mode'],
       rgb: json['rgb'].cast<int>(),

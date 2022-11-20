@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:rgb_control/models/mode.dart';
 import 'package:rgb_control/services/led_control/led_control_event.dart';
 import 'package:rgb_control/services/led_control/led_control_websocket.dart';
@@ -13,7 +12,7 @@ class ModeBloc extends Bloc<ModeEvent, ModeState> {
     on<ModeLoadEvent>(_onModeLoad);
   }
 
-  _onModeLoad(ModeLoadEvent event, Emitter<ModeState> state) async {
+  void _onModeLoad(ModeLoadEvent event, Emitter<ModeState> state) async {
     emit(ModeLoadingState());
 
     try {

@@ -45,7 +45,10 @@ class BodyHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // Listening to websockets connections and handling the data received
     WebSocketManager().listen(context);
+    
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rgb_control/utils/app_constants.dart';
 
 class FormWidget extends StatefulWidget {
-  TextInputType keyboardType;
-  String name;
-  TextEditingController textController;
+  final TextInputType keyboardType;
+  final String name;
+  final TextEditingController textController;
 
-  FormWidget(
+  const FormWidget(
       {Key? key,
       required this.keyboardType,
       required this.name,

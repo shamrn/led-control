@@ -15,7 +15,8 @@ class ColorPickerBloc extends Bloc<ColorPickerEvent, Color> {
     if (!event.inner) {
       WebSocketManager().addEvent(Event.setColor(
           rgb: RGB.colorToRgb(color: event.color),
-          brightness: event.brightness));
+          brightness: event.brightness
+      ));
     }
     emit(event.color);
   }
