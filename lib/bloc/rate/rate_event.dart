@@ -1,10 +1,15 @@
 part of 'rate_bloc.dart';
 
-abstract class RateEvent {}
-
-class RateSetEvent extends RateEvent {
-  bool inner;
+abstract class RateEvent {
   double level;
 
-  RateSetEvent({this.inner = false, required this.level});
+  RateEvent({required this.level});
+}
+
+class RateSetEvent extends RateEvent {
+  RateSetEvent({required super.level});
+}
+
+class RateInnerSetEvent extends RateEvent {
+  RateInnerSetEvent({required super.level});
 }

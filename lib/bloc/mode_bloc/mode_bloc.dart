@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:rgb_control/models/mode.dart';
 import 'package:rgb_control/services/led_control/led_control_event.dart';
-import 'package:rgb_control/services/led_control/led_control_websocket.dart';
 import 'package:rgb_control/services/mode/mode_repository.dart';
 
 part 'mode_event.dart';
@@ -24,18 +23,22 @@ class ModeBloc extends Bloc<ModeEvent, ModeState> {
   }
 }
 
-class ModeSetBloc extends Bloc<ModeEvent, ModeSetState> {
+class ModeSetBloc extends Bloc<ModeBaseSetEvent, ModeSetState> {
   ModeSetBloc() : super(ModeSetState(modeId: null)) {
     on<ModeSetEvent>(_onModeSet);
+
+    on<ModeInnerSetEvent>(_onInnerModeSet);
   }
 
   void _onModeSet(ModeSetEvent event, emit) {
-    if (!event.inner) {
-      WebSocketManager().addEvent(Event.setMode(
-          modeId: event.modeId,
-          rate: event.rate!,
-          brightness: event.brightness!));
-    }
+    LedControlWsEvent.setMode(
+        modeId: event.modeId,
+        rate: event.rate!,
+        brightness: event.brightness!);
+    emit(ModeSetState(modeId: event.modeId));
+  }
+
+  void _onInnerModeSet(ModeInnerSetEvent event, emit) {
     emit(ModeSetState(modeId: event.modeId));
   }
 

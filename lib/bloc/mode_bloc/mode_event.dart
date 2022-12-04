@@ -4,15 +4,19 @@ abstract class ModeEvent {}
 
 class ModeLoadEvent extends ModeEvent {}
 
-class ModeSetEvent extends ModeEvent {
-  bool inner;
+abstract class ModeBaseSetEvent extends ModeEvent {
   int modeId;
+
+  ModeBaseSetEvent({required this.modeId});
+}
+
+class ModeInnerSetEvent extends ModeBaseSetEvent {
+  ModeInnerSetEvent({required super.modeId});
+}
+
+class ModeSetEvent extends ModeBaseSetEvent {
   double? brightness;
   double? rate;
 
-  ModeSetEvent(
-      {this.inner = false,
-      required this.modeId,
-      this.brightness,
-      this.rate});
+  ModeSetEvent({required super.modeId, this.brightness, this.rate});
 }

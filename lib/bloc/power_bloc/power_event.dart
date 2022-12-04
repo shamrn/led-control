@@ -2,14 +2,10 @@ part of 'power_bloc.dart';
 
 abstract class PowerEvent {}
 
-class PowerOnEvent extends PowerEvent {
-  bool inner;
+class PowerOnEvent extends PowerEvent {}
 
-  PowerOnEvent({this.inner = false});
-}
+class PowerOffEvent extends PowerEvent {}
 
-class PowerOffEvent extends PowerEvent {
-  bool inner;
+class PowerInnerOnEvent extends PowerEvent {}
 
-  PowerOffEvent({this.inner = false});
-}
+class PowerInnerOffEvent extends PowerEvent {}

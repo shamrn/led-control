@@ -1,30 +1,35 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rgb_control/services/led_control/led_control_event.dart';
-import 'package:rgb_control/services/led_control/led_control_websocket.dart';
 
 part 'power_event.dart';
-
 part 'power_state.dart';
 
 class PowerBloc extends Bloc<PowerEvent, PowerState> {
   PowerBloc() : super(PowerOffState()) {
-    on<PowerOnEvent>(_onColorPowerOn);
-    on<PowerOffEvent>(_onColorPowerOff);
+    on<PowerOnEvent>(_onPowerOn);
+    on<PowerOffEvent>(_onPowerOff);
+
+    on<PowerInnerOnEvent>(_onInnerPowerOn);
+    on<PowerInnerOffEvent>(_onInnerPowerOff);
   }
 
-  void _onColorPowerOn(PowerOnEvent event, Emitter<PowerState> emit) {
-    if (!event.inner) WebSocketManager().addEvent(Event.on());
+  void _onPowerOn(PowerOnEvent event, Emitter<PowerState> emit) {
+    LedControlWsEvent.on();
     emit(PowerOnState());
   }
 
-  void _onColorPowerOff(PowerOffEvent event, Emitter<PowerState> emit) {
-    if (!event.inner) WebSocketManager().addEvent(Event.off());
+  void _onPowerOff(PowerOffEvent event, Emitter<PowerState> emit) {
+    LedControlWsEvent.off();
     emit(PowerOffState());
   }
 
-  void setInnerOn() {
-    if (state is PowerOffState) add(PowerOnEvent(inner: true));
+  void _onInnerPowerOn(PowerInnerOnEvent event, Emitter<PowerState> emit) {
+    emit(PowerOnState());
+  }
+
+  void _onInnerPowerOff(PowerInnerOffEvent event, Emitter<PowerState> emit) {
+    emit(PowerOffState());
   }
 
   void switching(PowerState state) {

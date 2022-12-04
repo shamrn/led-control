@@ -9,43 +9,121 @@ import 'package:rgb_control/bloc/rate/rate_bloc.dart';
 import 'package:rgb_control/models/led_state.dart';
 import 'package:rgb_control/models/rgb.dart';
 
-// TODO Change to cleaner code.
-void ledControlHandler({
-  required BuildContext context,
-  required LedState ledState
-}) {
+abstract class BaseLedControlHandler {
+  BuildContext context;
+  LedState ledState;
 
-  // Handling brightness level -------------------------------------------------
-  BrightnessBloc brightnessBloc = BlocProvider.of<BrightnessBloc>(context);
-  brightnessBloc.add(BrightnessSetEvent(
-      inner: true, level: ledState.brightness
-  ));
+  BaseLedControlHandler({required this.context, required this.ledState}) {
+    handle();
+  }
 
-  // Handling color picker -----------------------------------------------------
-  BlocProvider.of<ColorPickerBloc>(context).add(ColorPickerSetEvent(
-      inner: true,
+  Bloc _getBloc();
+
+  void handle();
+}
+
+// Handling brightness level ---------------------------------------------------
+
+class LedControlBrightnessHandler extends BaseLedControlHandler {
+  LedControlBrightnessHandler(
+      {required super.context, required super.ledState});
+
+  @override
+  BrightnessBloc _getBloc() {
+    return BlocProvider.of<BrightnessBloc>(context);
+  }
+
+  @override
+  void handle() {
+    BrightnessBloc brightnessBloc = _getBloc();
+    brightnessBloc.add(BrightnessInnerSetEvent(level: ledState.brightness));
+  }
+}
+
+// Handling color picker -------------------------------------------------------
+
+class LedControlColorPickerHandler extends BaseLedControlHandler {
+  LedControlColorPickerHandler(
+      {required super.context, required super.ledState});
+
+  @override
+  ColorPickerBloc _getBloc() {
+    return BlocProvider.of<ColorPickerBloc>(context);
+  }
+
+  @override
+  void handle() {
+    ColorPickerBloc colorPickerBloc = _getBloc();
+    colorPickerBloc.add(ColorPickerInnerSetEvent(
       color: RGB.rgbToHex(rgb: ledState.rgb.toList()),
-      brightness: brightnessBloc.state
-  ));
+    ));
+  }
+}
 
-  // Handling rate -------------------------------------------------------------
-  BlocProvider.of<RateBloc>(context).add(RateSetEvent(
-      inner: true, level: ledState.rate
-  ));
+// Handling rate ---------------------------------------------------------------
 
-  // Handling power ( on/off ) -------------------------------------------------
-  PowerBloc powerBloc = BlocProvider.of<PowerBloc>(context);
-  if (ledState.state == LedStateEnum.off) {
-    powerBloc.add(PowerOffEvent(inner: true));
-  } else {
-    powerBloc.add(PowerOnEvent(inner: true));
+class LedControlRateHandler extends BaseLedControlHandler {
+  LedControlRateHandler({required super.context, required super.ledState});
+
+  @override
+  RateBloc _getBloc() {
+    return BlocProvider.of<RateBloc>(context);
   }
 
-  // Handling mode -------------------------------------------------------------
-  ModeSetBloc modeSetBloc = BlocProvider.of<ModeSetBloc>(context);
-  if (ledState.mode == null) {
-    modeSetBloc.reset();
-  } else {
-    modeSetBloc.add(ModeSetEvent(inner: true, modeId: ledState.mode!));
+  @override
+  void handle() {
+    RateBloc rateBloc = _getBloc();
+    rateBloc.add(RateInnerSetEvent(level: ledState.rate));
   }
+}
+
+// Handling power ( on/off ) ---------------------------------------------------
+
+class LedControlPowerHandler extends BaseLedControlHandler {
+  LedControlPowerHandler({required super.context, required super.ledState});
+
+  @override
+  PowerBloc _getBloc() {
+    return BlocProvider.of<PowerBloc>(context);
+  }
+
+  @override
+  void handle() {
+    PowerBloc powerBloc = _getBloc();
+    if (ledState.state == LedStateEnum.off) {
+      powerBloc.add(PowerInnerOffEvent());
+    } else {
+      powerBloc.add(PowerInnerOnEvent());
+    }
+  }
+}
+
+// Handling mode ---------------------------------------------------------------
+
+class LedControlModeHandler extends BaseLedControlHandler {
+  LedControlModeHandler({required super.context, required super.ledState});
+
+  @override
+  ModeSetBloc _getBloc() {
+    return BlocProvider.of<ModeSetBloc>(context);
+  }
+
+  @override
+  void handle() {
+    ModeSetBloc modeSetBloc = _getBloc();
+    if (ledState.mode == null) {
+      modeSetBloc.reset();
+    } else {
+      modeSetBloc.add(ModeInnerSetEvent(modeId: ledState.mode!));
+    }
+  }
+}
+
+void ledControlHandler(
+    {required BuildContext context, required LedState ledState}) {
+  LedControlBrightnessHandler(context: context, ledState: ledState);
+  LedControlColorPickerHandler(context: context, ledState: ledState);
+  LedControlRateHandler(context: context, ledState: ledState);
+  LedControlPowerHandler(context: context, ledState: ledState);
+  LedControlModeHandler(context: context, ledState: ledState);
 }

@@ -140,7 +140,7 @@ class _ModeCardWidgetState extends State<ModeCardWidget> {
                       child: InkWell(
                         onTap: () {
                           HapticFeedback.vibrate();
-                          context.read<PowerBloc>().setInnerOn();
+                          context.read<PowerBloc>().add(PowerInnerOnEvent());
                           context.read<ModeSetBloc>().add(ModeSetEvent(
                               modeId: widget.mode.id,
                               brightness:

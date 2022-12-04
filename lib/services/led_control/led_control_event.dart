@@ -1,43 +1,44 @@
-enum EventEnum { off, on, setColor, setMode, setBrightness, setRate }
+import 'package:rgb_control/services/led_control/led_control_websocket.dart';
 
-class Event {
-  static Map<String, int> off() {
-    return {'event': EventEnum.off.index};
+enum LedControlEventEnum { off, on, setColor, setMode, setBrightness, setRate }
+
+class LedControlWsEvent {
+  static WebSocketManager ws = WebSocketManager();
+
+  static off() {
+    ws.addEvent({'event': LedControlEventEnum.off.index});
   }
 
-  static Map<String, int> on() {
-    return {'event': EventEnum.on.index};
+  static on() {
+    ws.addEvent({'event': LedControlEventEnum.on.index});
   }
 
-  static Map<String, dynamic> setColor(
-      {required List<int> rgb, required double brightness}) {
-    return {
-      'event': EventEnum.setColor.index,
+  static setColor({required List<int> rgb, required double brightness}) {
+    ws.addEvent({
+      'event': LedControlEventEnum.setColor.index,
       'rgb': rgb,
       'brightness': brightness
-    };
+    });
   }
 
-  static Map<String, dynamic> setBrightness({required brightness}) {
-    return {
-      'event': EventEnum.setBrightness.index,
+  static setBrightness({required brightness}) {
+    ws.addEvent({
+      'event': LedControlEventEnum.setBrightness.index,
       'brightness': brightness
-    };
+    });
   }
 
-  static Map<String, dynamic> setRate({required rate}) {
-    return {'event': EventEnum.setRate.index, 'rate': rate};
+  static setRate({required rate}) {
+    ws.addEvent({'event': LedControlEventEnum.setRate.index, 'rate': rate});
   }
 
-  static Map<String, dynamic> setMode(
-      {required int modeId,
-      required double rate,
-      required double brightness}) {
-    return {
-      'event': EventEnum.setMode.index,
+  static setMode(
+      {required int modeId, required double rate, required double brightness}) {
+    ws.addEvent({
+      'event': LedControlEventEnum.setMode.index,
       'mode': modeId,
       'brightness': brightness,
       'rate': rate
-    };
+    });
   }
 }

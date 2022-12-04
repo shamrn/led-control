@@ -1,10 +1,15 @@
 part of 'brightness_bloc.dart';
 
-abstract class BrightnessEvent {}
-
-class BrightnessSetEvent extends BrightnessEvent {
-  bool inner;
+abstract class BrightnessEvent {
   double level;
 
-  BrightnessSetEvent({this.inner = false, required this.level});
+  BrightnessEvent({required this.level});
+}
+
+class BrightnessSetEvent extends BrightnessEvent {
+  BrightnessSetEvent({required super.level});
+}
+
+class BrightnessInnerSetEvent extends BrightnessEvent {
+  BrightnessInnerSetEvent({required super.level});
 }

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
-abstract class ColorPickerEvent {}
+abstract class ColorPickerEvent {
+  Color color;
+
+  ColorPickerEvent({required this.color});
+}
 
 class ColorPickerSetEvent extends ColorPickerEvent {
-  bool inner;
-  Color color;
   double brightness;
 
-  ColorPickerSetEvent(
-      {this.inner = false, required this.color, required this.brightness});
+  ColorPickerSetEvent({required super.color, required this.brightness});
+}
+
+class ColorPickerInnerSetEvent extends ColorPickerEvent {
+  ColorPickerInnerSetEvent({required super.color});
 }

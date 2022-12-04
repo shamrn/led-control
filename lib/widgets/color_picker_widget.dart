@@ -40,7 +40,7 @@ class _ColorPickerWidgetState extends State<ColorPickerWidget> {
     required BuildContext context,
   }) {
     context.read<ModeSetBloc>().reset();
-    context.read<PowerBloc>().setInnerOn();
+    context.read<PowerBloc>().add(PowerInnerOnEvent());
     ColorPickerBloc().add(ColorPickerSetEvent(
         color: color,
         brightness: BlocProvider.of<BrightnessBloc>(context).state));
